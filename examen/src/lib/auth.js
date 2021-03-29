@@ -25,6 +25,7 @@ function useAuthProvider() {
     const [user, setUser] = useState(null);
 
     const handleUser = (user) => {
+        console.log('user', user)
         if (user) {
             // si tengo sesión activa
             setUser(user);
