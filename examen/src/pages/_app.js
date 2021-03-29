@@ -8,6 +8,7 @@ import Navigation from "@/components/Navigation";
 import {Router} from "next/router";
 import NProgress from "nprogress";
 
+
 Router.events.on("routeChangeStart", (url) => {
     console.log(`Loading: ${url}`);
     NProgress.start();
@@ -19,7 +20,7 @@ function App({Component, pageProps}) {
     return (
         <>
             <Head>
-                <title>Examen Final</title>
+                <title>help friend's</title>
                 <meta
                     name="viewport"
                     content="minimum-scale=1, initial-scale=1, width=device-width"
@@ -38,12 +39,10 @@ function App({Component, pageProps}) {
                             </Grid>
                         </Grid>
                     </Container>
-                    {/*<IconsFooter/>*/}
                 </ThemeProvider>
             </AuthProvider>
         </>
     )
-
 }
 
 export default App

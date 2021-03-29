@@ -2,8 +2,11 @@ import React from 'react';
 import {fade, makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
 import {Menu, Link as MuiLink} from '@material-ui/core';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import {useAuth} from "@/lib/auth";
 import Link from "next/link";
 import Button from "@material-ui/core/Button";
@@ -78,43 +81,48 @@ export default function PrimarySearchAppBar() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
+    const isMenuOpen = Boolean(anchorEl);
+    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+
     const handleLogout = async () => {
         try {
             await logout();
         } catch (error) {
             console.log('error', error)
         }
-    };
+    }
 
+    const handleMobileMenuOpen = (event) => {
+        setMobileMoreAnchorEl(event.currentTarget);
+    };
 
     return (
         <div className={classes.grow}>
             <AppBar position="static" style={{marginBottom: 40}}>
-                <Toolbar>
+                <Toolbar >
                     <Link href='/' passHref>
-                        <MuiLink>
-                            <Button>
-                                <h2 style={{color: 'white'}}>Inicio</h2>
-                            </Button>
-                        </MuiLink>
+                        <Button>
+                            <h2 style={{color: 'white'}}>Inicio</h2>
+                        </Button>
                     </Link>
-                    <div className={classes.title}/>
-                    <div className={classes.sectionDesktop}>
+                    <div className={classes.grow}/>
+                    <div>
                         {
-                            user === null ? (
-                                    'verificando'
-                                )
-                                : user === false ? (
-                                    <Link href='/login'>
-                                        <MenuItem>Iniciar Sesion</MenuItem>
-                                    </Link>
-                                )
-                                : (
-                                    <Link>
-                                        <MenuItem onClick={handleLogout}>Salir</MenuItem>
-                                    </Link>
+                            user === false ? (
+                                <Link href='/login' passHref>
+                                    <Button style={{color: 'white'}}>
+                                        <Typography className={classes.title} variant="h7">Iniciar Sesion</Typography>
+                                    </Button>
+                                </Link>
 
-                                )
+                            ) : (
+                                <Link href='/' passHref>
+                                    <Button style={{color: 'white'}} onClick={handleLogout}>
+                                        <Typography className={classes.title} variant="h7">Salir</Typography>
+                                    </Button>
+                                </Link>
+                            )
                         }
                     </div>
                 </Toolbar>
