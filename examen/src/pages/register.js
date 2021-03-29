@@ -2,19 +2,21 @@ import React, {useState} from 'react';
 import {Button, Grid, InputAdornment, TextField} from '@material-ui/core'
 import {AccountCircle, LockRounded} from '@material-ui/icons'
 import Link from 'next/link'
-import {useAuth} from "../lib/auth";
 import withoutAuth from "@/hocs/withoutAuth";
+import {useAuth} from "@/lib/auth";
 import {useForm} from "react-hook-form";
-import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import {yupResolver} from "@hookform/resolvers/yup";
 
 const schema = yup.object().shape({
+    name: yup.string().required('Ingrese su nombre'),
     email: yup
         .string()
         .email("Ingrese un email válido")
         .required("Ingrese su email."),
     password: yup.string().required("Ingrese su clave"),
+    password_confirmation: yup.string().required('Debe confirmar la contraseña'),
 });
 
 const useStyles = makeStyles((theme) => ({
@@ -29,11 +31,10 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Login = () => {
-    const {login} = useAuth();
+const Register = () => {
+    const {register: doRegister} = useAuth();
     const classes = useStyles();
     const [loading, setLoading] = useState(false);
-
     const {register, handleSubmit, errors} = useForm({
         resolver: yupResolver(schema)
     })
@@ -42,7 +43,7 @@ const Login = () => {
         setLoading(true);
         console.log('data', data)
         try {
-            const userData = await login(data)
+            const userData = await doRegister(data)
         } catch (error) {
             if (error.response) {
                 // The request was made and the server responded with a status code
@@ -61,35 +62,7 @@ const Login = () => {
             }
             console.log(error.config);
         }
-
-    };
-
-    // const handleViewComments = async () => {
-    //     try {
-    //         const articleData = await Article.getById('1');
-    //         console.log('articleData', articleData)
-    //     } catch (error) {
-    //         if (error.response) {
-    //             // The request was made and the server responded with a status code
-    //             // that falls out of the range of 2xx
-    //             console.log(error.response.data);
-    //             console.log(error.response.status);
-    //             console.log(error.response.headers);
-    //         } else if (error.request) {
-    //             // The request was made but no response was received
-    //             // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-    //             // http.ClientRequest in node.js
-    //             console.log(error.request);
-    //         } else {
-    //             // Something happened in setting up the request that triggered an Error
-    //             console.log('Error', error.message);
-    //         }
-    //         console.log(error.config);
-    //     }
-    //
-    // };
-
-
+    }
     return (
         <div>
             <Grid container style={{minHeight: '100vh'}}>
@@ -102,6 +75,7 @@ const Login = () => {
                         }}
                     />
                 </Grid>
+
                 <Grid container item xs={12} sm={6}
                       alignItems='center'
                       direction='column'
@@ -109,9 +83,21 @@ const Login = () => {
                       style={{padding: 10}}
                 >
                     <div/>
-                    <div style={{display: 'flex', flexDirection: 'column', maxWidth: 300, minWidth: 400}}>
+                    <div style={{display: 'flex', flexDirection: 'column', maxWidth: 200, minWidth: 400}}>
                         <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
-                            <Grid container spacing={2} alignItems="center">
+                            <Grid container spacing={1} alignItems="center">
+                                <Grid xs={12} item>
+                                    <TextField
+                                        id="name"
+                                        name="name"
+                                        type="name"
+                                        label="Nombre"
+                                        inputRef={register}
+                                        autoComplete="name"
+                                        error={!!errors.name}
+                                        helperText={errors.name?.message}
+                                    />
+                                </Grid>
                                 <Grid xs={12} item>
                                     <TextField
                                         id="email"
@@ -129,15 +115,27 @@ const Login = () => {
                                         id="password"
                                         name="password"
                                         type="password"
-                                        label="Clave"
+                                        label="Contraseña"
                                         inputRef={register}
-                                        autoComplete="current-password"
+                                        //autoComplete="current-password"
                                         error={!!errors.password}
                                         helperText={errors.password?.message}
                                     />
                                 </Grid>
-
                                 <Grid xs={12} item>
+                                    <TextField
+                                        id="password_confirmation"
+                                        name="password_confirmation"
+                                        type="password"
+                                        label="Confirmar contraseño"
+                                        inputRef={register}
+                                        //autoComplete="current-password"
+                                        error={!!errors.password_confirmation}
+                                        helperText={errors.password_confirmation?.message}
+                                    />
+                                </Grid>
+
+                                <Grid xs={12} item className={classes.buttonWrapper}>
                                     <Button
                                         name="submit"
                                         variant="contained"
@@ -145,16 +143,8 @@ const Login = () => {
                                         color="primary"
                                         disabled={loading}
                                     >
-                                        Iniciar sesión
+                                        Registrarse
                                     </Button>
-                                </Grid>
-                                <Grid className={classes.padd}>
-                                    <p style={{marginTop: 10, marginBottom: 10}}>No tienes cuenta? registrate</p>
-                                </Grid>
-                                <Grid xs={12} item className={classes.buttonWrapper}>
-                                    <Link href={'/register'}>
-                                        <Button color='primary' variant='contained'>Registro</Button>
-                                    </Link>
                                 </Grid>
                             </Grid>
                         </form>
@@ -167,4 +157,4 @@ const Login = () => {
     );
 };
 
-export default withoutAuth(Login);
+export default withoutAuth(Register);
