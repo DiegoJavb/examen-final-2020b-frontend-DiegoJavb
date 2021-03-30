@@ -60,22 +60,29 @@ const ArticleDetails = () => {
     if (error) return <div>No se pudo cargar el producto </div>
     if (!data) return <div>Cargando productos </div>
     console.log('data', data)
+    const arr = [1, 2, 3]
     return (
         <div>
 
             <Grid container style={{minHeight: '50vh'}}>
                 <Grid container xs={12}>
                     <Grid container xs={8} spacing={3}>
-                        <Card className={classes.root}>
-                            <CardMedia
-                                component="img"
-                                alt="Contemplative Reptile"
-                                height="200"
-                                title={data.name}
-                                className={classes.cover}
-                                image='https://picsum.photos/300/350'
-                            />
-                        </Card>
+                        {
+                            arr.map(image => {
+                                return (
+                                    <Card key={arr[image]} className={classes.root}>
+                                        <CardMedia
+                                            component="img"
+                                            alt=""
+                                            height="200"
+                                            title={data.name}
+                                            className={classes.cover}
+                                            image='https://picsum.photos/300/350'
+                                        />
+                                    </Card>
+                                )
+                            })
+                        }
                     </Grid>
                     <Grid xs={4}>
                         <Card>
@@ -90,25 +97,25 @@ const ArticleDetails = () => {
                         </Card>
                     </Grid>
                 </Grid>
-                    <Grid container xs={12}>
-                        <Card>
-                            <CardContent>
-                                <Typography variant="body2" color="textSecondary" component="p">
-                                    <b>Producto</b>: {data.name}
-                                </Typography>
-                                <Typography variant="body2" color="textSecondary" component="p">
-                                    <b>Stock</b>: {data.status}
-                                </Typography>
-                                <Typography variant="body2" color="textSecondary" component="p">
-                                    <b>Costo</b>: {data.price}
-                                </Typography>
-                                <Typography variant="body2" color="textSecondary" component="p">
-                                    <b>Codigo de producto</b>: {data.code}
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                    </Grid>
+                <Grid container xs={12}>
+                    <Card>
+                        <CardContent>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                <b>Producto</b>: {data.name}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                <b>Stock</b>: {data.status}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                <b>Costo</b>: {data.price}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                <b>Codigo de producto</b>: {data.code}
+                            </Typography>
+                        </CardContent>
+                    </Card>
                 </Grid>
+            </Grid>
 
         </div>
     )
