@@ -58,7 +58,7 @@ export default function Home() {
                                     <CardActionArea>
                                         <CardContent>
                                             <Typography gutterBottom variant="h5" component="h2">
-                                                <Link href='/'>
+                                                <Link href='/suppliers'>
                                                     <a className={styles.card}>
                                                         Proveedores
                                                     </a>
