@@ -101,7 +101,7 @@ const useStyles2 = makeStyles({
 });
 
 export default function CustomPaginationActionsTable() {
-
+    const {user} = useAuth();
     const classes = useStyles2();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -114,11 +114,11 @@ export default function CustomPaginationActionsTable() {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
-    const {user} = useAuth();
+
     const {data, error} = useSWR(`/products`, fetcher)
     if (error) return <div>No se pudo cargar el articulo </div>
     if (!data) return <div>Cargando articulos </div>
-    const tableFiltered = data.filter(product=>user.user.id===product.user_id)
+    const tableFiltered = data.filter(product=>user.id===product.user_id)
     console.log('tableFiltered', tableFiltered)
 
     return (

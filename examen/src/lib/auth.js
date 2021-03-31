@@ -25,7 +25,7 @@ function useAuthProvider() {
     const [user, setUser] = useState(null);
 
     const handleUser = (user) => {
-        console.log('user', user)
+        console.log('user en Auth', user)
         if (user) {
             // si tengo sesión activa
             setUser(user);
@@ -45,8 +45,8 @@ function useAuthProvider() {
     async function register(data) {
         try {
             const response = await api.post("/register", data);
-            console.log("rersponse", response);
-            handleUser(response.data);
+            console.log("response", response);
+            handleUser(response.data.user);
             return response;
         } catch (error) {
             if (error.response) {
@@ -74,6 +74,7 @@ function useAuthProvider() {
     async function login(data) {
         try {
             const response = await api.post("/login", data);
+            console.log('response en el Auth', response)
             handleUser(response.data.user);
             return response;
         } catch (error) {

@@ -55,6 +55,7 @@ const Products = () => {
     const {register, handleSubmit, errors} = useForm({
         resolver: yupResolver(schema)
     })
+    console.log('usuario en la pantalla de products', user.name)
     const abrirCerrarModal = () => {
         setModal(!modal)
     };
@@ -144,7 +145,8 @@ const Products = () => {
             </Modal>
             <div>
                 <h1>
-                    Usuario: {user.user.name}
+                    {/*Usuario: {user.user.name}*/}
+                    Usuario: {user.name}
                 </h1>
             </div>
             <Button onClick={() => abrirCerrarModal()}>

@@ -4,9 +4,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import MenuItem from '@material-ui/core/MenuItem';
-import {Menu, Link as MuiLink} from '@material-ui/core';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import {useAuth} from "@/lib/auth";
 import Link from "next/link";
 import Button from "@material-ui/core/Button";
@@ -77,14 +74,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PrimarySearchAppBar() {
     const {user, logout} = useAuth()
-    console.log("usuario",user)
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-    const isMenuOpen = Boolean(anchorEl);
-    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
 
     const handleLogout = async () => {
         try {
@@ -113,14 +105,14 @@ export default function PrimarySearchAppBar() {
                             user === false ? (
                                 <Link href='/login' passHref>
                                     <Button style={{color: 'white'}}>
-                                        <Typography className={classes.title} variant="h7">Iniciar Sesion</Typography>
+                                        <Typography className={classes.title} variant="h6">Iniciar Sesion</Typography>
                                     </Button>
                                 </Link>
 
                             ) : (
                                 <Link href='/' passHref>
                                     <Button style={{color: 'white'}} onClick={handleLogout}>
-                                        <Typography className={classes.title} variant="h7">Salir</Typography>
+                                        <Typography className={classes.title} variant="h6">Salir</Typography>
                                     </Button>
                                 </Link>
                             )

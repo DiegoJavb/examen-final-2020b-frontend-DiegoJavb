@@ -1,5 +1,5 @@
 import '../styles/globals.css'
-import {AuthProvider} from "../lib/auth";
+import {AuthProvider} from "@/lib/auth";
 import {Container, CssBaseline, Grid, ThemeProvider} from "@material-ui/core";
 import theme from "@/styles/theme";
 import React from "react";
@@ -20,7 +20,7 @@ function App({Component, pageProps}) {
     return (
         <>
             <Head>
-                <title>help friend's</title>
+                <title>Examen Final</title>
                 <meta
                     name="viewport"
                     content="minimum-scale=1, initial-scale=1, width=device-width"

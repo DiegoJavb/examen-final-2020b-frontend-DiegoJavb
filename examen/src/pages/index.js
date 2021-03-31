@@ -37,36 +37,38 @@ export default function Home() {
                       style={{minHeight: '50vh'}}
                 >
                     <div className={styles.grid}>
-                        <Grid container>
-                            <Link href='/products'>
+                        <Grid container spacing={4}>
+                            <Grid item>
                                 <Card className={classes.root}>
                                     <CardActionArea>
                                         <CardContent>
                                             <Typography gutterBottom variant="h5" component="h2">
-                                                <a className={styles.card}>
-                                                    Lista de Productos
-                                                </a>
-
+                                                <Link href='/products'>
+                                                    <a className={styles.card}>
+                                                        Lista de Productos
+                                                    </a>
+                                                </Link>
                                             </Typography>
                                         </CardContent>
                                     </CardActionArea>
                                 </Card>
-                            </Link>
-                            <Link href='/'>
+                            </Grid>
+                            <Grid item>
                                 <Card className={classes.root}>
                                     <CardActionArea>
                                         <CardContent>
                                             <Typography gutterBottom variant="h5" component="h2">
-                                                <a className={styles.card}>
-                                                    Proveedores
-                                                </a>
+                                                <Link href='/'>
+                                                    <a className={styles.card}>
+                                                        Proveedores
+                                                    </a>
+                                                </Link>
                                             </Typography>
                                         </CardContent>
                                     </CardActionArea>
                                 </Card>
-                            </Link>
+                            </Grid>
                         </Grid>
-
                     </div>
                 </Grid>
 

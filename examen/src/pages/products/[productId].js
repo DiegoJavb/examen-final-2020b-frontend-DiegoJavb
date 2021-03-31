@@ -50,11 +50,11 @@ const userId = (user) => {
 }
 
 const ArticleDetails = () => {
+    const {user} = useAuth();
     const [loading, setLoading] = useState(false);
     const classes = useStyles();
     const router = useRouter();
     const {productId} = router.query
-    const {user} = useAuth();
     console.log('user', user)
     const {data, error} = useSWR(`/products/${productId}`, fetcher)
     if (error) return <div>No se pudo cargar el producto </div>
@@ -88,10 +88,10 @@ const ArticleDetails = () => {
                         <Card>
                             <CardContent>
                                 <Typography variant="body2" color="textSecondary" component="p">
-                                    Usuario: {user.user.name}
+                                    Usuario: {user.name}
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary" component="p">
-                                    Correo: {user.user.email}
+                                    Correo: {user.email}
                                 </Typography>
                             </CardContent>
                         </Card>

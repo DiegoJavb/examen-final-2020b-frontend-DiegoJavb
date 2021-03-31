@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Button, Grid, InputAdornment, TextField} from '@material-ui/core'
 import {AccountCircle, LockRounded} from '@material-ui/icons'
 import Link from 'next/link'
-import {useAuth} from "../lib/auth";
+import {useAuth} from "@/lib/auth";
 import withoutAuth from "@/hocs/withoutAuth";
 import {useForm} from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers/yup';
