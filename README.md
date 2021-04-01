@@ -8,3 +8,8 @@
     - Inicio de sesión de usuario
     - Cada usuario puede registrar sus productos
     - Cada usuario puede ver una lista de sus productos registrados en una tabla con código y nombre. Al hacer clic en un botón "ver más" se debe visiualizar todos los detalles del producto.
+
+* Deploy en Heroku
+- https://glacial-dusk-57309.herokuapp.com/
+* Deploy en Vercel
+- https://examen-final-2020b-frontend-diego-javb.vercel.app/
